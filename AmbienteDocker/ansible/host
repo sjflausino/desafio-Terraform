@@ -1,0 +1,2 @@
+[ambDocker]
+ec2-54-208-142-51.compute-1.amazonaws.com ansible_user=ubuntu ansible_ssh_private_key_file="/home/tec/.ssh/terraform-aws"

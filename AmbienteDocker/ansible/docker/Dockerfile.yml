@@ -1,0 +1,10 @@
+#Baixa imagem com JDK11 para rodar a aplicação
+FROM openjdk:11
+# Cria a pasta de trabalho no container
+RUN mkdir /app
+# Copia os arquivos do diretorio atual para a pasta de trabalho
+COPY . /app
+# seleciona a pasta de trabalho padrão onde os comando serão executados
+WORKDIR /app
+#Comando dados no bash para a saida da execução!
+ENTRYPOINT ["java", "HelloWorld"]

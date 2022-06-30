@@ -1,0 +1,34 @@
+---
+- hosts: ambDocker
+
+  tasks:
+    - name: Atualizando pacotes e criando a pasta de trabalho
+      shell: "sudo apt-get update -y && sudo apt-get upgrade -y && sudo mkdir /dest"
+      become: yes
+
+    - name: Instalando o docker
+      apt:
+        name: docker
+        state: latest
+      become: yes
+
+    - name: Instalando o docker.io
+      apt:
+        name: docker.io
+        state: latest
+      become: yes
+
+    - name: Copiando o aquivo Java para aws
+      copy:
+        src: "/home/tec/projects/TarefasSuzan/desafio-Terraform/AmbienteDocker/ansible/docker/HelloWorld.class"
+        dest: /dest
+      become: yes
+
+    - name: Copiando o aquivo Dokerfile para aws
+      copy:
+        src: "/home/tec/projects/TarefasSuzan/desafio-Terraform/AmbienteDocker/ansible/docker/Dockerfile.yml"
+        dest: /dest
+      become: yes
+    - name: Buildando a imagem e rodando a aplicação
+      shell: cd /dest && docker build -t hello-world -f Dockerfile.yml . && docker run hello-world
+      become: yes
